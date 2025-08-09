@@ -7,7 +7,8 @@
       <div class="macbook-wrapper">
         <img src="/MacBook Air 13&quot; - 4th Gen - Midnight.png" alt="MacBook Air" class="macbook-bezel" />
         <div class="screen-content">
-          <img src="/BEC88203-96D3-43D5-A279-1631F7908A40_1_102_o.jpeg" alt="App Screenshot" class="app-screenshot" />
+          <div class="wallpaper-background"></div>
+          <img src="/Screenshot 2025-07-27 at 20.47.03.png" alt="App Screenshot" class="app-screenshot" />
         </div>
       </div>
     </div>
@@ -41,24 +42,42 @@
     width: 100%;
     height: auto;
     display: block;
+    position: relative;
+    z-index: 3;
   }
 
   .screen-content {
     position: absolute;
-    top: 6.2%;
-    left: 12.5%;
-    width: 75%;
-    height: 76%;
+    top: 3.2%;
+    left: 10%;
+    right: 10%;
+    height: 80%;
     overflow: hidden;
     border-radius: 6px;
     transform: translateY(9%);
+    z-index: 1;
+  }
+
+  .wallpaper-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/macos-big-sur-wallpaper-1-1536x1536.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
   }
 
   .app-screenshot {
-    width: 100%;
-    height: 100%;
+    position: relative;
+    width: 90%;
+    top: 8%;
+    left: 5%;
     object-fit: cover;
     object-position: center top;
+    z-index: 2;
   }
 
   @media (max-width: 768px) {
