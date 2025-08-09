@@ -83,21 +83,16 @@
       <!-- Results Chart -->
       <div class="bento-card chart">
         <div class="card-content">
-          <h3>Results that matter</h3>
-          <p>See real impact on your app's performance with detailed analytics and conversion tracking.</p>
-          <div class="stats-highlight">
-            <span class="percentage">+47%</span>
-            <span class="metric">conversion increase</span>
+          <h3>Proven results</h3>
+          <p>Apps that optimize their screenshots typically see a 35% increase in conversion rates. Join thousands of successful developers.</p>
+          <div class="stats-overlay">
+            <span class="percentage">+35%</span>
+            <span class="metric">average conversion lift</span>
           </div>
-        </div>
-        <div class="card-visual">
-          <div class="chart-container">
-            <div class="chart-line">
-              <div class="chart-point" style="left: 20%; bottom: 30%"></div>
-              <div class="chart-point" style="left: 40%; bottom: 45%"></div>
-              <div class="chart-point active" style="left: 60%; bottom: 70%"></div>
-              <div class="chart-point" style="left: 80%; bottom: 75%"></div>
-            </div>
+          <div class="chart-points">
+            <div class="chart-point" style="left: 50%; bottom: 45%"></div>
+            <div class="chart-point active" style="left: 70%; bottom: 70%"></div>
+            <div class="chart-point" style="left: 90%; bottom: 75%"></div>
           </div>
         </div>
       </div>
@@ -115,10 +110,20 @@
               <div class="file"></div>
               <div class="file"></div>
             </div>
-            <div class="arrow">→</div>
-            <div class="appstore-logo">
-              <div class="logo-icon">📱</div>
-              <span>App Store Connect</span>
+            <div class="curved-arrow">
+              <svg viewBox="0 0 100 50" width="100" height="50">
+                <defs>
+                  <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+                   refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280" />
+                  </marker>
+                </defs>
+                <path d="M 5 25 Q 50 5 95 25" stroke="#6b7280" stroke-width="2" 
+                      fill="none" marker-end="url(#arrowhead)" class="arrow-path"/>
+              </svg>
+            </div>
+            <div class="appstore-connect">
+              <img src="/New_App_Store_connect_logo.webp" alt="App Store Connect" class="asc-logo" />
             </div>
           </div>
         </div>
@@ -171,6 +176,42 @@
     overflow: hidden;
   }
 
+  .bento-card.chart {
+    padding: 0;
+  }
+
+  .bento-card.chart .card-content {
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+    height: 100%;
+  }
+
+  .bento-card.chart .card-content::before {
+    content: '';
+    position: absolute;
+    top: 60%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40%;
+    background: linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.15) 100%);
+    border-radius: 8px;
+    z-index: -1;
+    mask: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 15%, rgba(0,0,0,1) 40%);
+    -webkit-mask: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 15%, rgba(0,0,0,1) 40%);
+  }
+
+  .bento-card.chart .card-content .chart-points {
+    position: absolute;
+    top: 60%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40%;
+    z-index: -1;
+  }
+
   .bento-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
@@ -215,6 +256,11 @@
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
+  }
+
+  .card-visual.chart-with-stats {
+    align-items: stretch;
+    justify-content: stretch;
   }
 
   /* Phone Mockup */
@@ -390,39 +436,57 @@
     font-size: 14px;
   }
 
-  /* Stats */
-  .stats-highlight {
+  /* Chart with Stats Overlay */
+  .chart-with-stats {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .chart-background {
+    position: absolute;
+    top: 60%;
+    left: -2rem;
+    right: -2rem;
+    bottom: -2rem;
+    width: calc(100% + 4rem);
+    height: calc(40% + 4rem);
+    opacity: 0.8;
+    z-index: 1;
+    mask: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 15%, rgba(0,0,0,1) 40%);
+    -webkit-mask: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 15%, rgba(0,0,0,1) 40%);
+  }
+
+  .stats-overlay {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: auto;
+    text-align: left;
+    margin-top: 1rem;
   }
 
   .percentage {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
     color: #10b981;
     line-height: 1;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
   }
 
   .metric {
-    color: #6b7280;
+    color: #374151;
     font-size: 0.875rem;
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
   }
 
   /* Chart */
-  .chart-container {
-    width: 100%;
-    height: 100px;
-    position: relative;
-  }
-
   .chart-line {
     position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.1) 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.15) 100%);
     border-radius: 8px;
   }
 
@@ -452,13 +516,15 @@
   .upload-demo {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 2rem;
     width: 100%;
     justify-content: center;
   }
 
   .file-stack {
     position: relative;
+    width: 60px;
+    height: 50px;
   }
 
   .file {
@@ -471,50 +537,58 @@
   }
 
   .file:nth-child(1) {
-    transform: rotate(-5deg);
+    transform: rotate(-8deg);
     z-index: 1;
   }
 
   .file:nth-child(2) {
     transform: rotate(0deg);
     z-index: 2;
-    left: 10px;
+    left: 8px;
     background: white;
   }
 
   .file:nth-child(3) {
-    transform: rotate(5deg);
+    transform: rotate(8deg);
     z-index: 3;
-    left: 20px;
+    left: 16px;
     background: #7c3aed;
     border-color: #7c3aed;
   }
 
-  .arrow {
-    font-size: 24px;
-    color: #6b7280;
-    animation: moveRight 2s ease-in-out infinite;
-  }
-
-  @keyframes moveRight {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(10px); }
-  }
-
-  .appstore-logo {
+  .curved-arrow {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 16px;
-    background: #f3f4f6;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #374151;
+    justify-content: center;
   }
 
-  .logo-icon {
-    font-size: 20px;
+  .arrow-path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawArrow 3s ease-in-out infinite;
+  }
+
+  @keyframes drawArrow {
+    0% { stroke-dashoffset: 100; }
+    50% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -100; }
+  }
+
+  .appstore-connect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .asc-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .asc-logo:hover {
+    transform: scale(1.1);
   }
 
   @media (max-width: 1024px) {
