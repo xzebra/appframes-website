@@ -84,7 +84,7 @@
       <div class="bento-card chart">
         <div class="card-content">
           <h3>Proven results</h3>
-          <p>Apps that optimize their screenshots typically see a 35% increase in conversion rates. Join thousands of successful developers.</p>
+          <p>Apps that optimize their screenshots typically see an increase in conversion rates.</p>
           <div class="stats-overlay">
             <span class="percentage">+35%</span>
             <span class="metric">average conversion lift</span>
@@ -112,14 +112,9 @@
             </div>
             <div class="curved-arrow">
               <svg viewBox="0 0 100 50" width="100" height="50">
-                <defs>
-                  <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                   refX="0" refY="3.5" orient="auto">
-                    <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280" />
-                  </marker>
-                </defs>
-                <path d="M 5 25 Q 50 5 95 25" stroke="#6b7280" stroke-width="2" 
-                      fill="none" marker-end="url(#arrowhead)" class="arrow-path"/>
+                <path d="M 5 25 Q 50 5 85 25" stroke="#6b7280" stroke-width="2" 
+                      fill="none" class="arrow-path"/>
+                <polygon points="85,20 95,25 85,30" fill="#6b7280" class="arrow-tip"/>
               </svg>
             </div>
             <div class="appstore-connect">
@@ -560,6 +555,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: visible;
+  }
+
+  .curved-arrow svg {
+    overflow: visible;
   }
 
   .arrow-path {
@@ -568,10 +568,23 @@
     animation: drawArrow 3s ease-in-out infinite;
   }
 
+  .arrow-tip {
+    opacity: 0;
+    animation: showTip 3s ease-in-out infinite;
+  }
+
   @keyframes drawArrow {
     0% { stroke-dashoffset: 100; }
     50% { stroke-dashoffset: 0; }
     100% { stroke-dashoffset: -100; }
+  }
+
+  @keyframes showTip {
+    0% { opacity: 0; }
+    45% { opacity: 0; }
+    50% { opacity: 1; }
+    55% { opacity: 1; }
+    100% { opacity: 0; }
   }
 
   .appstore-connect {
