@@ -1,0 +1,87 @@
+---
+---
+
+<section class="app-demo">
+  <div class="container">
+    <div class="macbook-container">
+      <div class="macbook-wrapper">
+        <img src="/MacBook Air 13&quot; - 4th Gen - Midnight.png" alt="MacBook Air" class="macbook-bezel" />
+        <div class="screen-content">
+          <img src="/BEC88203-96D3-43D5-A279-1631F7908A40_1_102_o.jpeg" alt="App Screenshot" class="app-screenshot" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .app-demo {
+    padding: 4rem 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .macbook-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .macbook-wrapper {
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .macbook-bezel {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .screen-content {
+    position: absolute;
+    top: 6.2%;
+    left: 12.5%;
+    width: 75%;
+    height: 76%;
+    overflow: hidden;
+    border-radius: 6px;
+    transform: translateY(9%);
+  }
+
+  .app-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  @media (max-width: 768px) {
+    .app-demo {
+      padding: 2rem 0;
+    }
+    
+    .macbook-wrapper {
+      max-width: 600px;
+    }
+
+    .screen-content {
+      border-radius: 4px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .macbook-wrapper {
+      max-width: 400px;
+    }
+
+    .screen-content {
+      border-radius: 3px;
+    }
+  }
+</style>
