@@ -34,7 +34,7 @@
 
   .macbook-wrapper {
     position: relative;
-    max-width: 800px;
+    max-width: 1200px;
     width: 100%;
   }
 
@@ -80,13 +80,19 @@
     z-index: 2;
   }
 
+  @media (max-width: 1024px) {
+    .macbook-wrapper {
+      max-width: 900px;
+    }
+  }
+
   @media (max-width: 768px) {
     .app-demo {
       padding: 2rem 0;
     }
     
     .macbook-wrapper {
-      max-width: 600px;
+      max-width: 700px;
     }
 
     .screen-content {
@@ -96,7 +102,7 @@
 
   @media (max-width: 480px) {
     .macbook-wrapper {
-      max-width: 400px;
+      max-width: 450px;
     }
 
     .screen-content {
