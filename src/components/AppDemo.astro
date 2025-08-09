@@ -5,10 +5,14 @@
   <div class="container">
     <div class="macbook-container">
       <div class="macbook-wrapper">
-        <img src="/MacBook Air 13&quot; - 4th Gen - Midnight.png" alt="MacBook Air" class="macbook-bezel" />
-        <div class="screen-content">
-          <div class="wallpaper-background"></div>
-          <img src="/Screenshot 2025-07-27 at 20.47.03.png" alt="App Screenshot" class="app-screenshot" />
+        <div class="macbook-base" id="macbook-base">
+          <img src="/MacBook Air 13&quot; - 4th Gen - Midnight.png" alt="MacBook Air" class="macbook-bezel" />
+          <div class="screen-content">
+            <div class="wallpaper-background"></div>
+          </div>
+        </div>
+        <div class="screenshot-container">
+          <img src="/Screenshot 2025-07-27 at 20.47.03.png" alt="App Screenshot" class="app-screenshot" id="app-screenshot" />
         </div>
       </div>
     </div>
@@ -17,7 +21,6 @@
 
 <style>
   .app-demo {
-    padding: 4rem 0;
   }
 
   .container {
@@ -36,6 +39,17 @@
     position: relative;
     max-width: 1200px;
     width: 100%;
+  }
+
+  .macbook-base {
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  }
+
+  .macbook-base.loaded {
+    transform: translateY(0);
+    opacity: 1;
   }
 
   .macbook-bezel {
@@ -70,14 +84,34 @@
     z-index: 1;
   }
 
+  .screenshot-container {
+    position: absolute;
+    top: 3.2%;
+    left: 10%;
+    right: 10%;
+    height: 80%;
+    transform: translateY(9%);
+    z-index: 2;
+    opacity: 0;
+    transition: transform 0.6s ease-out 0.4s, opacity 0.6s ease-out 0.4s;
+  }
+
+  .screenshot-container.loaded {
+    opacity: 1;
+  }
+
   .app-screenshot {
-    position: relative;
     width: 90%;
-    top: 8%;
-    left: 5%;
+    height: 80%;
+    margin: 8% 0 0 5%;
     object-fit: cover;
     object-position: center top;
-    z-index: 2;
+    transform: translateY(40px);
+    transition: transform 0.6s ease-out 0.4s;
+  }
+
+  .app-screenshot.loaded {
+    transform: translateY(0);
   }
 
   @media (max-width: 1024px) {
@@ -110,3 +144,45 @@
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const macbookBase = document.getElementById('macbook-base');
+    const appScreenshot = document.getElementById('app-screenshot') as HTMLImageElement;
+    const screenshotContainer = appScreenshot?.parentElement;
+    
+    // Get the bezel image inside macbook-base
+    const macbookBezel = macbookBase?.querySelector('.macbook-bezel') as HTMLImageElement;
+    
+    // Load MacBook base (bezel + wallpaper together)
+    if (macbookBezel) {
+      macbookBezel.addEventListener('load', () => {
+        // Show base (bezel and wallpaper together)
+        macbookBase?.classList.add('loaded');
+        
+        // Show screenshot after a delay
+        setTimeout(() => {
+          screenshotContainer?.classList.add('loaded');
+          appScreenshot?.classList.add('loaded');
+        }, 400);
+      });
+      
+      // If already cached/loaded
+      if (macbookBezel.complete) {
+        macbookBase?.classList.add('loaded');
+        
+        setTimeout(() => {
+          screenshotContainer?.classList.add('loaded');
+          appScreenshot?.classList.add('loaded');
+        }, 400);
+      }
+    }
+    
+    // Fallback: show everything after 1 second
+    setTimeout(() => {
+      macbookBase?.classList.add('loaded');
+      screenshotContainer?.classList.add('loaded');
+      appScreenshot?.classList.add('loaded');
+    }, 1000);
+  });
+</script>
