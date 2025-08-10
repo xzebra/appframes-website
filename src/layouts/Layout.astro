@@ -1,4 +1,8 @@
 ---
+import favicon from '../images/favicon.svg';
+import screenshotLight from '../images/Screenshot_light.png';
+import macosLogo from '../images/macOS-3.png';
+
 export interface Props {
   title: string;
 }
@@ -12,9 +16,9 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content="Fastest way to improve your App Store screenshots" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" as="image" href="/Screenshot_light.png" />
-    <link rel="preload" as="image" href="/macOS-3.png" />
+    <!-- <link rel="icon" type="image/svg+xml" href={favicon.src} /> -->
+    <link rel="preload" as="image" href={screenshotLight.src} />
+    <link rel="preload" as="image" href={macosLogo.src} />
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
     <title>{title}</title>
   </head>

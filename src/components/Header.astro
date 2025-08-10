@@ -1,11 +1,13 @@
 ---
+import { Picture } from 'astro:assets';
+import macosLogo from '../images/macOS-3.png';
 ---
 
 <header class="header">
   <div class="container">
     <div class="nav">
       <div class="logo">
-        <img src="/macOS-3.png" alt="App Logo" width="48" height="48" />
+        <Picture src={macosLogo} formats={['avif', 'webp']} alt="App Logo" width={48} height={48} />
       </div>
       <nav class="nav-links">
         <a href="#features">Features</a>

@@ -1,5 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import AppStoreShowcase from './AppStoreShowcase.astro';
+import appStoreConnectLogo from '../images/New_App_Store_connect_logo.webp';
 ---
 
 <section class="bento-section">
@@ -96,7 +98,7 @@ import AppStoreShowcase from './AppStoreShowcase.astro';
               <dotlottie-wc src="https://lottie.host/48f5b9f5-5239-4e9d-a96f-30b985a1e9fc/igIVhfs6R5.lottie" style="width: 100px;height: 50px" speed="1" autoplay loop></dotlottie-wc>
             </div>
             <div class="appstore-connect">
-              <img src="/New_App_Store_connect_logo.webp" alt="App Store Connect" class="asc-logo" />
+              <Picture src={appStoreConnectLogo} formats={['avif', 'webp']} alt="App Store Connect" class="asc-logo" width={60} height={60} />
             </div>
           </div>
         </div>

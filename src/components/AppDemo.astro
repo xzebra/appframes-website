@@ -1,10 +1,12 @@
 ---
+import { Picture } from 'astro:assets';
+import screenshotLight from '../images/Screenshot_light.png';
 ---
 
 <section class="app-demo">
   <div class="container">
     <div class="screenshot-wrapper">
-      <img src="/Screenshot_light.png" alt="App Screenshot" class="app-screenshot" />
+      <Picture src={screenshotLight} formats={['avif', 'webp']} alt="App Screenshot" class="app-screenshot" />
     </div>
   </div>
 </section>

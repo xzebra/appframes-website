@@ -1,4 +1,14 @@
 ---
+import { Picture } from 'astro:assets';
+import themesImg from '../images/features/themes.png';
+import variantsImg from '../images/features/variants.png';
+import abTestsImg from '../images/features/abTests.png';
+import loupeImg from '../images/features/loupe.png';
+import layersImg from '../images/features/layers.png';
+import xcstringsImg from '../images/features/xcstrings.png';
+import overlayElementsImg from '../images/features/overlayElements.png';
+import markdownImg from '../images/features/markdown.png';
+import deviceFramesImg from '../images/features/deviceFrames.png';
 ---
 
 <section id="features" class="features-section">
@@ -12,7 +22,7 @@
       <div class="column">
         <div class="feature-card">
           <div class="feature-image">
-            <img src="/features/themes.png" alt="Theming system" />
+            <Picture src={themesImg} formats={['avif', 'webp']} alt="Theming system" />
           </div>
           <div class="feature-content">
             <h3>Theming system</h3>
@@ -22,7 +32,7 @@
 
         <div class="feature-card">
           <div class="feature-image">
-            <img src="/features/variants.png" alt="Variant management" />
+            <Picture src={variantsImg} formats={['avif', 'webp']} alt="Variant management" />
           </div>
           <div class="feature-content">
             <h3>Variant management</h3>
@@ -32,7 +42,7 @@
 
         <div class="feature-card">
           <div class="feature-image">
-            <img src="/features/abTests.png" alt="Upload to App Store A/B tests" />
+            <Picture src={abTestsImg} formats={['avif', 'webp']} alt="Upload to App Store A/B tests" />
           </div>
           <div class="feature-content">
             <h3>Upload to App Store A/B tests</h3>
@@ -44,7 +54,7 @@
       <div class="column">
         <div class="feature-card">
           <div class="feature-image">
-            <img src="/features/loupe.png" alt="Loupe effect" />
+            <Picture src={loupeImg} formats={['avif', 'webp']} alt="Loupe effect" />
           </div>
           <div class="feature-content">
             <h3>Loupe effect</h3>
@@ -54,7 +64,7 @@
 
         <div class="feature-card">
           <div class="feature-image">
-            <img src="/features/layers.png" alt="Element layers" />
+            <Picture src={layersImg} formats={['avif', 'webp']} alt="Element layers" />
           </div>
           <div class="feature-content">
             <h3>Element layers</h3>
@@ -71,7 +81,7 @@
 
         <div class="feature-card">
           <div class="feature-image">
-            <img src="/features/xcstrings.png" alt="XCStrings integration" />
+            <Picture src={xcstringsImg} formats={['avif', 'webp']} alt="XCStrings integration" />
           </div>
           <div class="feature-content">
             <h3>XCStrings integration</h3>
@@ -90,7 +100,7 @@
       <div class="column">
         <div class="feature-card">
           <div class="feature-image">
-            <img src="/features/overlayElements.png" alt="Custom overlays" />
+            <Picture src={overlayElementsImg} formats={['avif', 'webp']} alt="Custom overlays" />
           </div>
           <div class="feature-content">
             <h3>Custom overlays</h3>
@@ -100,7 +110,7 @@
 
         <div class="feature-card">
           <div class="feature-image">
-            <img src="/features/markdown.png" alt="Text styling with markdown" />
+            <Picture src={markdownImg} formats={['avif', 'webp']} alt="Text styling with markdown" />
           </div>
           <div class="feature-content">
             <h3>Text styling with markdown</h3>
@@ -110,7 +120,7 @@
 
         <div class="feature-card">
           <div class="feature-image">
-            <img src="/features/deviceFrames.png" alt="Real & custom device bezels" />
+            <Picture src={deviceFramesImg} formats={['avif', 'webp']} alt="Real & custom device bezels" />
           </div>
           <div class="feature-content">
             <h3>Real & custom device bezels</h3>
