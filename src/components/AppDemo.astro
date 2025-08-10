@@ -4,7 +4,7 @@
 <section class="app-demo">
   <div class="container">
     <div class="screenshot-wrapper">
-      <img src="/Screenshot_light.png" alt="App Screenshot" class="app-screenshot" id="app-screenshot" />
+      <img src="/Screenshot_light.png" alt="App Screenshot" class="app-screenshot" />
     </div>
   </div>
 </section>
@@ -30,12 +30,6 @@
     max-width: 1200px;
     width: 100%;
     height: auto;
-    opacity: 0;
-    transition: opacity 0.8s ease-out;
-  }
-
-  .app-screenshot.loaded {
-    opacity: 1;
   }
 
   @media (max-width: 768px) {
@@ -57,25 +51,3 @@
   }
 </style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const appScreenshot = document.getElementById('app-screenshot') as HTMLImageElement;
-    
-    if (appScreenshot) {
-      // Fade in when image loads
-      appScreenshot.addEventListener('load', () => {
-        appScreenshot.classList.add('loaded');
-      });
-      
-      // If already cached/loaded
-      if (appScreenshot.complete) {
-        appScreenshot.classList.add('loaded');
-      }
-      
-      // Fallback: show after 1 second
-      setTimeout(() => {
-        appScreenshot.classList.add('loaded');
-      }, 1000);
-    }
-  });
-</script>
