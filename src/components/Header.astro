@@ -10,10 +10,12 @@ const isDocsPage = pathname.startsWith('/docs');
   <div class="container">
     <div class="nav">
       <div class="logo">
-        <Picture src={macosLogo} formats={['avif', 'webp']} alt="App Logo" width={48} height={48} quality={100} />
+        <a href="/">
+          <Picture src={macosLogo} formats={['avif', 'webp']} alt="App Logo" width={48} height={48} quality={100} />
+        </a>
       </div>
       <nav class="nav-links">
-        <a href="#features">Features</a>
+        <a href="/#features">Features</a>
         <a href="/docs" class={isDocsPage ? 'active' : ''}>Docs</a>
         <a href="#">Download</a>
       </nav>
@@ -48,6 +50,17 @@ const isDocsPage = pathname.startsWith('/docs');
       drop-shadow(1px 0px 0.5px rgba(0, 0, 0, 0.05))
       drop-shadow(-1px 0px 0.5px rgba(0, 0, 0, 0.05))
       ;
+  }
+
+  .logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .logo a:hover {
+    opacity: 0.8;
   }
 
   .nav-links {
