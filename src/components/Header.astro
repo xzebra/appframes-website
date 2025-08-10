@@ -17,7 +17,7 @@ const isDocsPage = pathname.startsWith('/docs');
       </div>
       <div class="nav-right">
         {isDocsPage && (
-          <div class="search-container-nav">
+          <div class="search-container-nav desktop-search">
             <SearchBox />
           </div>
         )}
@@ -28,6 +28,11 @@ const isDocsPage = pathname.startsWith('/docs');
         </nav>
       </div>
     </div>
+    {isDocsPage && (
+      <div class="mobile-search">
+        <SearchBox />
+      </div>
+    )}
   </div>
 </header>
 
@@ -56,6 +61,17 @@ const isDocsPage = pathname.startsWith('/docs');
 
   .search-container-nav {
     max-width: 300px;
+  }
+
+  .mobile-search {
+    display: none;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 1rem;
+  }
+
+  .desktop-search {
+    display: block;
   }
 
   .logo {
@@ -109,6 +125,16 @@ const isDocsPage = pathname.startsWith('/docs');
     
     .search-container-nav {
       max-width: 200px;
+    }
+  }
+
+  @media (max-width: 550px) {
+    .desktop-search {
+      display: none;
+    }
+    
+    .mobile-search {
+      display: block;
     }
   }
 </style>
