@@ -1,9 +1,12 @@
 ---
 import Layout from './Layout.astro';
 import Header from '../components/Header.astro';
+import { generateTOC } from '../utils/docsTOC.js';
 
 const { frontmatter } = Astro.props;
 const { pathname } = Astro.url;
+
+const tocSections = generateTOC();
 ---
 
 <Layout title={frontmatter.title}>
@@ -12,17 +15,20 @@ const { pathname } = Astro.url;
     <div class="docs-container">
       <aside class="sidebar">
         <nav>
-          <h3>Guides</h3>
-          <ul>
-            <li><a href="/docs/getting-started" class={pathname === '/docs/getting-started' ? 'active' : ''}>Getting Started</a></li>
-            <li><a href="/docs/creating-mockups" class={pathname === '/docs/creating-mockups' ? 'active' : ''}>Creating Mockups</a></li>
-            <li><a href="/docs/templates" class={pathname === '/docs/templates' ? 'active' : ''}>Templates</a></li>
-          </ul>
-          <h3>Reference</h3>
-          <ul>
-            <li><a href="/docs/api" class={pathname === '/docs/api' ? 'active' : ''}>API Reference</a></li>
-            <li><a href="/docs/features" class={pathname === '/docs/features' ? 'active' : ''}>Features</a></li>
-          </ul>
+          {tocSections.map(section => (
+            <>
+              <h3>{section.title}</h3>
+              <ul>
+                {section.pages.map(page => (
+                  <li>
+                    <a href={page.route} class={pathname === page.route ? 'active' : ''}>
+                      {page.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))}
           <div class="back-to-docs">
             <a href="/docs">← Back to Docs</a>
           </div>

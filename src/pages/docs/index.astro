@@ -1,43 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-
-// Function to get card data from markdown files
-function getDocsCards() {
-  const docsDir = path.join(process.cwd(), 'src/pages/docs');
-  const cards = [];
-  
-  try {
-    const files = fs.readdirSync(docsDir);
-    
-    for (const file of files) {
-      if (file.endsWith('.md') && file !== 'index.md') {
-        const filePath = path.join(docsDir, file);
-        const fileContent = fs.readFileSync(filePath, 'utf8');
-        const { data: frontmatter } = matter(fileContent);
-        
-        if (frontmatter.card) {
-          const route = `/docs/${file.replace('.md', '')}`;
-          cards.push({
-            ...frontmatter.card,
-            route
-          });
-        }
-      }
-    }
-    
-    // Sort by order
-    return cards.sort((a, b) => (a.order || 0) - (b.order || 0));
-  } catch (error) {
-    console.error('Error reading docs cards:', error);
-    return [];
-  }
-}
+import { getDocsCards, generateTOC } from '../../utils/docsTOC.js';
 
 const docsCards = getDocsCards();
+const tocSections = generateTOC();
+const { pathname } = Astro.url;
 ---
 
 <Layout title="AppFrames Documentation">
@@ -46,17 +14,20 @@ const docsCards = getDocsCards();
     <div class="docs-container">
       <aside class="sidebar">
         <nav>
-          <h3>Guides</h3>
-          <ul>
-            <li><a href="/docs/getting-started">Getting Started</a></li>
-            <li><a href="/docs/creating-mockups">Creating Mockups</a></li>
-            <li><a href="/docs/templates">Templates</a></li>
-          </ul>
-          <h3>Reference</h3>
-          <ul>
-            <li><a href="/docs/api">API Reference</a></li>
-            <li><a href="/docs/features">Features</a></li>
-          </ul>
+          {tocSections.map(section => (
+            <>
+              <h3>{section.title}</h3>
+              <ul>
+                {section.pages.map(page => (
+                  <li>
+                    <a href={page.route} class={pathname === page.route ? 'active' : ''}>
+                      {page.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))}
         </nav>
       </aside>
       
@@ -128,8 +99,10 @@ const docsCards = getDocsCards();
     transition: color 0.2s;
   }
   
-  .sidebar a:hover {
+  .sidebar a:hover,
+  .sidebar a.active {
     color: #111827;
+    font-weight: 500;
   }
   
   .content {

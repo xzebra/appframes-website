@@ -1,6 +1,6 @@
 ---
 title: Getting Started - AppFrames
-layout: ../../layouts/DocsLayout.astro
+layout: ../../../layouts/DocsLayout.astro
 # Card metadata for docs index
 card:
   emoji: 🚀
