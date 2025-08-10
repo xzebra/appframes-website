@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import macosLogo from '../images/macOS-logo.svg';
+import SearchBox from './SearchBox.astro';
 
 const { pathname } = Astro.url;
 const isDocsPage = pathname.startsWith('/docs');
@@ -14,11 +15,18 @@ const isDocsPage = pathname.startsWith('/docs');
           <Picture src={macosLogo} formats={['avif', 'webp']} alt="App Logo" width={48} height={48} quality={100} />
         </a>
       </div>
-      <nav class="nav-links">
-        <a href="/#features">Features</a>
-        <a href="/docs" class={isDocsPage ? 'active' : ''}>Docs</a>
-        <a href="#">Download</a>
-      </nav>
+      <div class="nav-right">
+        {isDocsPage && (
+          <div class="search-container-nav">
+            <SearchBox />
+          </div>
+        )}
+        <nav class="nav-links">
+          <a href="/#features">Features</a>
+          <a href="/docs" class={isDocsPage ? 'active' : ''}>Docs</a>
+          <a href="#">Download</a>
+        </nav>
+      </div>
     </div>
   </div>
 </header>
@@ -38,6 +46,16 @@ const isDocsPage = pathname.startsWith('/docs');
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .search-container-nav {
+    max-width: 300px;
   }
 
   .logo {
@@ -81,8 +99,16 @@ const isDocsPage = pathname.startsWith('/docs');
   }
 
   @media (max-width: 768px) {
+    .nav-right {
+      gap: 1rem;
+    }
+    
     .nav-links {
       gap: 1rem;
+    }
+    
+    .search-container-nav {
+      max-width: 200px;
     }
   }
 </style>

@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
-import SearchBox from '../../components/SearchBox.astro';
 ---
 
 <Layout title="Getting Started - AppFrames Documentation">
@@ -9,9 +8,6 @@ import SearchBox from '../../components/SearchBox.astro';
   <main>
     <div class="docs-container">
       <aside class="sidebar">
-        <div class="search-section">
-          <SearchBox />
-        </div>
         <nav>
           <h3>Guides</h3>
           <ul>
@@ -103,10 +99,6 @@ import SearchBox from '../../components/SearchBox.astro';
     padding: 1.5rem;
     border-radius: 8px;
     height: fit-content;
-  }
-  
-  .search-section {
-    margin-bottom: 2rem;
   }
   
   .sidebar nav h3 {
