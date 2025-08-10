@@ -2,6 +2,38 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
+// Helper function to extract title and order from filename
+function parseFileName(filename) {
+  const nameWithoutExt = filename.replace(/\.md$/, '');
+  
+  // Check if filename starts with number prefix (e.g., "01-getting-started")
+  const match = nameWithoutExt.match(/^(\d+)-(.+)$/);
+  
+  if (match) {
+    const [, orderStr, cleanName] = match;
+    return {
+      order: parseInt(orderStr, 10),
+      cleanName: cleanName,
+      route: cleanName // Route doesn't include the number
+    };
+  }
+  
+  // Fallback for files without number prefix
+  return {
+    order: 999, // Put unnumbered files at the end
+    cleanName: nameWithoutExt,
+    route: nameWithoutExt
+  };
+}
+
+// Helper function to convert kebab-case to Title Case
+function toTitleCase(str) {
+  return str
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 // Single source of truth for docs TOC generation
 export function generateTOC() {
   const docsDir = path.join(process.cwd(), 'src/pages/docs');
@@ -13,22 +45,42 @@ export function generateTOC() {
     for (const entry of entries) {
       if (entry.isDirectory()) {
         const folderPath = path.join(docsDir, entry.name);
-        const tocPath = path.join(folderPath, '_toc.md');
+        const files = fs.readdirSync(folderPath);
         
-        if (fs.existsSync(tocPath)) {
-          const tocContent = fs.readFileSync(tocPath, 'utf8');
-          const { data: tocData } = matter(tocContent);
+        // Filter markdown files and skip _toc.md files
+        const mdFiles = files.filter(file => 
+          file.endsWith('.md') && !file.startsWith('_')
+        );
+        
+        if (mdFiles.length > 0) {
+          const pages = mdFiles
+            .map(file => {
+              const filePath = path.join(folderPath, file);
+              const fileContent = fs.readFileSync(filePath, 'utf8');
+              const { data: frontmatter } = matter(fileContent);
+              
+              const { order, cleanName, route } = parseFileName(file);
+              
+              // Use frontmatter title if available, otherwise generate from filename
+              const title = frontmatter.title 
+                ? frontmatter.title.replace(/\s*-\s*AppFrames.*$/, '') // Remove "- AppFrames" suffix
+                : toTitleCase(cleanName);
+              
+              return {
+                file: route, // Clean route without numbers
+                title: title,
+                order: order,
+                route: `/docs/${entry.name}/${route}`
+              };
+            })
+            .sort((a, b) => a.order - b.order);
           
-          const pages = (tocData.pages || [])
-            .map(page => ({
-              ...page,
-              route: `/docs/${entry.name}/${page.file}`
-            }))
-            .sort((a, b) => (a.order || 0) - (b.order || 0));
+          // Generate section title from folder name
+          const sectionTitle = toTitleCase(entry.name);
           
           sections.push({
-            title: tocData.title,
-            order: tocData.order || 0,
+            title: sectionTitle,
+            order: entry.name === 'guides' ? 1 : 2, // Guides first, then others
             pages
           });
         }
@@ -63,10 +115,12 @@ export function getDocsCards() {
             const { data: frontmatter } = matter(fileContent);
             
             if (frontmatter.card) {
-              const route = `/docs/${entry.name}/${file.replace('.md', '')}`;
+              const { route } = parseFileName(file);
+              const cleanRoute = `/docs/${entry.name}/${route}`;
+              
               cards.push({
                 ...frontmatter.card,
-                route
+                route: cleanRoute
               });
             }
           }
