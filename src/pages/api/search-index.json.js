@@ -24,6 +24,11 @@ export async function GET() {
             ? baseRoute 
             : `${baseRoute}/${file.replace(/\.(astro|md)$/, '')}`;
           
+          // Skip the main docs welcome page
+          if (route === '/docs') {
+            return;
+          }
+          
           // Extract frontmatter and content
           const frontmatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---/);
           const bodyContent = content.replace(/^---\s*\n[\s\S]*?\n---/, '').trim();
