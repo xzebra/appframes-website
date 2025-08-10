@@ -2,28 +2,27 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-// Helper function to extract title and order from filename
-function parseFileName(filename) {
-  const nameWithoutExt = filename.replace(/\.md$/, '');
+// Helper function to read TOC file and get page ordering
+function readTOCFile(folderPath) {
+  const tocPath = path.join(folderPath, '_toc.md');
   
-  // Check if filename starts with number prefix (e.g., "01-getting-started")
-  const match = nameWithoutExt.match(/^(\d+)-(.+)$/);
-  
-  if (match) {
-    const [, orderStr, cleanName] = match;
-    return {
-      order: parseInt(orderStr, 10),
-      cleanName: cleanName,
-      route: cleanName // Route doesn't include the number
-    };
+  if (fs.existsSync(tocPath)) {
+    const tocContent = fs.readFileSync(tocPath, 'utf8');
+    const lines = tocContent.split('\n').filter(line => line.trim());
+    const pageOrder = {};
+    
+    lines.forEach((line, index) => {
+      const match = line.match(/^\s*-\s*\[.*?\]\((.+?)\)/);
+      if (match) {
+        const filename = match[1].replace(/\.md$/, '');
+        pageOrder[filename] = index + 1;
+      }
+    });
+    
+    return pageOrder;
   }
   
-  // Fallback for files without number prefix
-  return {
-    order: 999, // Put unnumbered files at the end
-    cleanName: nameWithoutExt,
-    route: nameWithoutExt
-  };
+  return {};
 }
 
 // Helper function to convert kebab-case to Title Case
@@ -53,24 +52,27 @@ export function generateTOC() {
         );
         
         if (mdFiles.length > 0) {
+          const pageOrder = readTOCFile(folderPath);
+          
           const pages = mdFiles
             .map(file => {
               const filePath = path.join(folderPath, file);
               const fileContent = fs.readFileSync(filePath, 'utf8');
               const { data: frontmatter } = matter(fileContent);
               
-              const { order, cleanName, route } = parseFileName(file);
+              const nameWithoutExt = file.replace(/\.md$/, '');
+              const order = pageOrder[nameWithoutExt] || 999; // Default order for pages not in TOC
               
               // Use frontmatter title if available, otherwise generate from filename
               const title = frontmatter.title 
                 ? frontmatter.title.replace(/\s*-\s*AppFrames.*$/, '') // Remove "- AppFrames" suffix
-                : toTitleCase(cleanName);
+                : toTitleCase(nameWithoutExt);
               
               return {
-                file: route, // Clean route without numbers
+                file: nameWithoutExt,
                 title: title,
                 order: order,
-                route: `/docs/${entry.name}/${route}`
+                route: `/docs/${entry.name}/${nameWithoutExt}`
               };
             })
             .sort((a, b) => a.order - b.order);
@@ -115,12 +117,12 @@ export function getDocsCards() {
             const { data: frontmatter } = matter(fileContent);
             
             if (frontmatter.card) {
-              const { route } = parseFileName(file);
-              const cleanRoute = `/docs/${entry.name}/${route}`;
+              const nameWithoutExt = file.replace(/\.md$/, '');
+              const actualRoute = `/docs/${entry.name}/${nameWithoutExt}`;
               
               cards.push({
                 ...frontmatter.card,
-                route: cleanRoute
+                route: actualRoute
               });
             }
           }
