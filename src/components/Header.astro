@@ -1,13 +1,13 @@
 ---
 import { Picture } from 'astro:assets';
-import macosLogo from '../images/macOS-3.png';
+import macosLogo from '../images/macOS-logo.svg';
 ---
 
 <header class="header">
   <div class="container">
     <div class="nav">
       <div class="logo">
-        <Picture src={macosLogo} formats={['avif', 'webp']} alt="App Logo" width={48} height={48} />
+        <Picture src={macosLogo} formats={['avif', 'webp']} alt="App Logo" width={48} height={48} quality={100} />
       </div>
       <nav class="nav-links">
         <a href="#features">Features</a>
@@ -39,12 +39,12 @@ import macosLogo from '../images/macOS-3.png';
     display: flex;
     align-items: center;
     gap: 0.5rem;
-  }
-
-  .logo img {
-    width: 48px;
-    height: 48px;
-    display: block;
+    filter:
+      drop-shadow(0px 1px 0.5px rgba(0, 0, 0, 0.05))
+      drop-shadow(0px -1px 0.5px rgba(0, 0, 0, 0.05))
+      drop-shadow(1px 0px 0.5px rgba(0, 0, 0, 0.05))
+      drop-shadow(-1px 0px 0.5px rgba(0, 0, 0, 0.05))
+      ;
   }
 
   .nav-links {
