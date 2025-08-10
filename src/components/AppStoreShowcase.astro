@@ -19,7 +19,7 @@
     <div class="marquee-track">
       <!-- First set -->
       <div class="screenshot-card red">
-        <div class="screenshot-content">
+        <div class="screenshot-content center">
           <div class="screenshot-main"></div>
           <div class="screenshot-text">
             <div class="text-line long"></div>
@@ -287,10 +287,22 @@
     gap: 0.5rem;
     padding: 0.5rem 0;
   }
+
+  .leading > .screenshot-text {
+    align-items: flex-start;
+  }
+
+  .trailing > .screenshot-text {
+    align-items: flex-end;
+  }
+
+  .center > .screenshot-text {
+    align-items: center;
+  }
   
   .text-line {
-    height: 8px;
-    background: rgba(255, 255, 255, 0.8);
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 4px;
   }
   
