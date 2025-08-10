@@ -8,6 +8,9 @@ pages:
   - file: features
     title: Features
     order: 2
+  - file: api
+    title: API Reference
+    order: 3
 ---
 
 # Reference
