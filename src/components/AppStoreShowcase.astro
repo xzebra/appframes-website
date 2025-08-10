@@ -12,7 +12,7 @@
         <div class="rating-count-mock"></div>
       </div>
     </div>
-    <div class="download-button-mock"></div>
+    <div class="download-button">GET</div>
   </div>
   
   <div class="screenshots-marquee">
@@ -205,12 +205,17 @@
     border-radius: 3px;
   }
   
-  .download-button-mock {
-    width: 32px;
-    height: 32px;
-    background: #d1d5db;
-    border-radius: 50%;
+  .download-button {
+    padding: 0.25rem 1rem;
+    background: #e5e7eb;
+    color: #d1d5db;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .screenshots-marquee {
