@@ -19,7 +19,7 @@
     <div class="marquee-track">
       <!-- First set -->
       <div class="screenshot-card red">
-        <div class="screenshot-content center">
+        <div class="screenshot-content center top">
           <div class="screenshot-main"></div>
           <div class="screenshot-text">
             <div class="text-line long"></div>
@@ -29,7 +29,7 @@
       </div>
       
       <div class="screenshot-card blue">
-        <div class="screenshot-content reverse">
+        <div class="screenshot-content leading bottom">
           <div class="screenshot-text">
             <div class="text-line long"></div>
             <div class="text-line medium"></div>
@@ -39,7 +39,7 @@
       </div>
       
       <div class="screenshot-card green">
-        <div class="screenshot-content">
+        <div class="screenshot-content center top">
           <div class="screenshot-main"></div>
           <div class="screenshot-text">
             <div class="text-line long"></div>
@@ -49,7 +49,7 @@
       </div>
       
       <div class="screenshot-card yellow">
-        <div class="screenshot-content reverse">
+        <div class="screenshot-content trailing bottom">
           <div class="screenshot-text">
             <div class="text-line medium"></div>
             <div class="text-line short"></div>
@@ -59,7 +59,7 @@
       </div>
       
       <div class="screenshot-card orange">
-        <div class="screenshot-content">
+        <div class="screenshot-content trailing top">
           <div class="screenshot-main"></div>
           <div class="screenshot-text">
             <div class="text-line long"></div>
@@ -69,7 +69,7 @@
       </div>
       
       <div class="screenshot-card purple">
-        <div class="screenshot-content reverse">
+        <div class="screenshot-content center bottom">
           <div class="screenshot-text">
             <div class="text-line long"></div>
             <div class="text-line short"></div>
@@ -80,7 +80,7 @@
       
       <!-- Duplicate set for seamless loop -->
       <div class="screenshot-card red">
-        <div class="screenshot-content">
+        <div class="screenshot-content leading top">
           <div class="screenshot-main"></div>
           <div class="screenshot-text">
             <div class="text-line long"></div>
@@ -90,7 +90,7 @@
       </div>
       
       <div class="screenshot-card blue">
-        <div class="screenshot-content reverse">
+        <div class="screenshot-content trailing bottom">
           <div class="screenshot-text">
             <div class="text-line long"></div>
             <div class="text-line medium"></div>
@@ -100,7 +100,7 @@
       </div>
       
       <div class="screenshot-card green">
-        <div class="screenshot-content">
+        <div class="screenshot-content center top">
           <div class="screenshot-main"></div>
           <div class="screenshot-text">
             <div class="text-line long"></div>
@@ -110,7 +110,7 @@
       </div>
       
       <div class="screenshot-card yellow">
-        <div class="screenshot-content reverse">
+        <div class="screenshot-content trailing bottom">
           <div class="screenshot-text">
             <div class="text-line medium"></div>
             <div class="text-line short"></div>
@@ -120,7 +120,7 @@
       </div>
       
       <div class="screenshot-card orange">
-        <div class="screenshot-content">
+        <div class="screenshot-content leading top">
           <div class="screenshot-main"></div>
           <div class="screenshot-text">
             <div class="text-line long"></div>
@@ -130,7 +130,7 @@
       </div>
       
       <div class="screenshot-card purple">
-        <div class="screenshot-content reverse">
+        <div class="screenshot-content trailing bottom">
           <div class="screenshot-text">
             <div class="text-line long"></div>
             <div class="text-line short"></div>
@@ -270,15 +270,21 @@
     gap: 0.5rem;
   }
   
-  .screenshot-content.reverse {
-    flex-direction: column-reverse;
-  }
-  
   .screenshot-main {
     flex: 1;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     min-height: 200px;
+  }
+
+  .top > .screenshot-main {
+    translate: 0 -30px;
+    transform: scaleY(1.1);
+  }
+
+  .bottom > .screenshot-main {
+    translate: 0 30px;
+    transform: scaleY(1.1);
   }
   
   .screenshot-text {
