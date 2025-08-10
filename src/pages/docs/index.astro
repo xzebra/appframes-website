@@ -1,6 +1,43 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+
+// Function to get card data from markdown files
+function getDocsCards() {
+  const docsDir = path.join(process.cwd(), 'src/pages/docs');
+  const cards = [];
+  
+  try {
+    const files = fs.readdirSync(docsDir);
+    
+    for (const file of files) {
+      if (file.endsWith('.md') && file !== 'index.md') {
+        const filePath = path.join(docsDir, file);
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const { data: frontmatter } = matter(fileContent);
+        
+        if (frontmatter.card) {
+          const route = `/docs/${file.replace('.md', '')}`;
+          cards.push({
+            ...frontmatter.card,
+            route
+          });
+        }
+      }
+    }
+    
+    // Sort by order
+    return cards.sort((a, b) => (a.order || 0) - (b.order || 0));
+  } catch (error) {
+    console.error('Error reading docs cards:', error);
+    return [];
+  }
+}
+
+const docsCards = getDocsCards();
 ---
 
 <Layout title="AppFrames Documentation">
@@ -29,29 +66,13 @@ import Header from '../../components/Header.astro';
         <p>AppFrames is your go-to tool for creating stunning app screenshots and mockups for the Mac App Store and marketing materials.</p>
         
         <div class="card-grid">
-          <div class="card">
-            <h3>🚀 Getting Started</h3>
-            <p>Learn the basics of AppFrames and create your first mockup.</p>
-            <a href="/docs/getting-started">Get started →</a>
-          </div>
-          
-          <div class="card">
-            <h3>🎨 Creating Mockups</h3>
-            <p>Advanced techniques for professional app mockups.</p>
-            <a href="/docs/creating-mockups">Learn more →</a>
-          </div>
-          
-          <div class="card">
-            <h3>📄 Templates</h3>
-            <p>Browse our collection of beautiful templates.</p>
-            <a href="/docs/templates">See templates →</a>
-          </div>
-          
-          <div class="card">
-            <h3>⚙️ Features</h3>
-            <p>Explore all the powerful features that make AppFrames special.</p>
-            <a href="/docs/features">View features →</a>
-          </div>
+          {docsCards.map(card => (
+            <div class="card">
+              <h3>{card.emoji} {card.shortTitle}</h3>
+              <p>{card.shortDescription}</p>
+              <a href={card.route}>{card.cta} →</a>
+            </div>
+          ))}
         </div>
       </div>
     </div>

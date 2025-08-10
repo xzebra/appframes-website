@@ -1,6 +1,13 @@
 ---
 title: Creating Professional Mockups - AppFrames
 layout: ../../layouts/DocsLayout.astro
+# Card metadata for docs index
+card:
+  emoji: 🎨
+  shortTitle: Creating Mockups
+  shortDescription: Advanced techniques for professional app mockups.
+  cta: Learn more
+  order: 2
 ---
 
 # Creating Professional Mockups

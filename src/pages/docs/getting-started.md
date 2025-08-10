@@ -1,6 +1,13 @@
 ---
 title: Getting Started - AppFrames
 layout: ../../layouts/DocsLayout.astro
+# Card metadata for docs index
+card:
+  emoji: 🚀
+  shortTitle: Getting Started
+  shortDescription: Learn the basics of AppFrames and create your first mockup.
+  cta: Get started
+  order: 1
 ---
 
 # Getting Started
