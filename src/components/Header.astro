@@ -1,6 +1,9 @@
 ---
 import { Picture } from 'astro:assets';
 import macosLogo from '../images/macOS-logo.svg';
+
+const { pathname } = Astro.url;
+const isDocsPage = pathname.startsWith('/docs');
 ---
 
 <header class="header">
@@ -11,7 +14,7 @@ import macosLogo from '../images/macOS-logo.svg';
       </div>
       <nav class="nav-links">
         <a href="#features">Features</a>
-        <a href="/docs">Docs</a>
+        <a href="/docs" class={isDocsPage ? 'active' : ''}>Docs</a>
         <a href="#">Download</a>
       </nav>
     </div>
@@ -59,7 +62,8 @@ import macosLogo from '../images/macOS-logo.svg';
     transition: color 0.2s;
   }
 
-  .nav-links a:hover {
+  .nav-links a:hover,
+  .nav-links a.active {
     color: #111827;
   }
 
