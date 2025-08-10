@@ -29,9 +29,9 @@ import AppStoreShowcase from './AppStoreShowcase.astro';
         <div class="card-visual">
           <div class="localization-demo">
             <div class="language-tabs">
-              <div class="tab active">🇺🇸 EN</div>
-              <div class="tab">🇪🇸 ES</div>
-              <div class="tab">🇫🇷 FR</div>
+              <div class="tab" data-lang="en">🇺🇸 EN</div>
+              <div class="tab" data-lang="es">🇪🇸 ES</div>
+              <div class="tab" data-lang="fr">🇫🇷 FR</div>
             </div>
             <div class="translated-content">
               <div class="text-line"></div>
@@ -255,15 +255,149 @@ import AppStoreShowcase from './AppStoreShowcase.astro';
     border-radius: 20px;
     font-size: 14px;
     transition: all 0.3s ease;
+    opacity: 0.6;
   }
 
   .tab.active {
     background: #3b82f6;
     color: white;
+    opacity: 1;
+  }
+
+  .localization-demo {
+    animation: cycleLanguages 9s infinite;
+  }
+
+  @keyframes cycleLanguages {
+    0%, 30% {
+      /* EN active */
+    }
+    33%, 63% {
+      /* ES active */
+    }
+    66%, 96% {
+      /* FR active */
+    }
+    100% {
+      /* Back to EN */
+    }
+  }
+
+  /* Language tab animations */
+  .tab[data-lang="en"] {
+    animation: tabEN 9s infinite;
+  }
+
+  .tab[data-lang="es"] {
+    animation: tabES 9s infinite;
+  }
+
+  .tab[data-lang="fr"] {
+    animation: tabFR 9s infinite;
+  }
+
+  @keyframes tabEN {
+    0%, 30%, 100% {
+      background: #3b82f6;
+      color: white;
+      opacity: 1;
+    }
+    33%, 96% {
+      background: #f3f4f6;
+      color: inherit;
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes tabES {
+    0%, 30% {
+      background: #f3f4f6;
+      color: inherit;
+      opacity: 0.6;
+    }
+    33%, 63% {
+      background: #3b82f6;
+      color: white;
+      opacity: 1;
+    }
+    66%, 100% {
+      background: #f3f4f6;
+      color: inherit;
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes tabFR {
+    0%, 63% {
+      background: #f3f4f6;
+      color: inherit;
+      opacity: 0.6;
+    }
+    66%, 96% {
+      background: #3b82f6;
+      color: white;
+      opacity: 1;
+    }
+    100% {
+      background: #f3f4f6;
+      color: inherit;
+      opacity: 0.6;
+    }
   }
 
   .translated-content {
     text-align: center;
+    animation: contentChange 9s infinite;
+  }
+
+  @keyframes contentChange {
+    0%, 30% {
+      /* EN - wider text */
+    }
+    33%, 63% {
+      /* ES - medium text */
+    }
+    66%, 96% {
+      /* FR - narrower text */
+    }
+  }
+
+  .translated-content .text-line:first-child {
+    animation: textLine1 9s infinite;
+  }
+
+  .translated-content .text-line.short {
+    animation: textLine2 9s infinite;
+  }
+
+  @keyframes textLine1 {
+    0%, 30% {
+      width: 80%;
+    }
+    33%, 63% {
+      width: 85%;
+    }
+    66%, 96% {
+      width: 75%;
+    }
+    100% {
+      width: 80%;
+    }
+  }
+
+  @keyframes textLine2 {
+    0%, 30% {
+      width: 60%;
+    }
+    33%, 63% {
+      width: 70%;
+    }
+    66%, 96% {
+      width: 55%;
+    }
+    100% {
+      width: 60%;
+    }
   }
 
   .text-line {
