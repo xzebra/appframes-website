@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import matter from 'gray-matter';
 
 // This endpoint generates a search index from actual markdown files at build time
 export async function GET() {
@@ -24,47 +25,77 @@ export async function GET() {
             ? baseRoute 
             : `${baseRoute}/${file.replace(/\.(astro|md)$/, '')}`;
           
-          // Skip the main docs welcome page
-          if (route === '/docs') {
+          // Skip the main docs welcome page and _toc files
+          if (route === '/docs' || file.startsWith('_')) {
             return;
           }
           
-          // Extract frontmatter and content
-          const frontmatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---/);
-          const bodyContent = content.replace(/^---\s*\n[\s\S]*?\n---/, '').trim();
-          
           let title = file.replace(/\.(astro|md)$/, '');
           let description = '';
+          let bodyContent = content;
           
-          if (frontmatterMatch) {
-            // Try to extract title from frontmatter or Layout title
-            const titleMatch = content.match(/title[:\s]*["']([^"']+)["']/i);
-            if (titleMatch) {
-              title = titleMatch[1];
+          if (file.endsWith('.md')) {
+            // Parse markdown with gray-matter
+            const { data: frontmatter, content: markdownContent } = matter(content);
+            bodyContent = markdownContent;
+            
+            // Use frontmatter title if available, clean up AppFrames suffix
+            if (frontmatter.title) {
+              title = frontmatter.title.replace(/\s*-\s*AppFrames.*$/, '');
+            }
+            
+            // Extract title from markdown h1 if no frontmatter title
+            if (!frontmatter.title) {
+              const h1Match = markdownContent.match(/^#\s+(.+)$/m);
+              if (h1Match) {
+                title = h1Match[1].trim();
+              }
+            }
+            
+            // Extract description from first paragraph after h1
+            const afterH1 = markdownContent.replace(/^#\s+.+$/m, '').trim();
+            const paragraphMatch = afterH1.match(/^(.+?)(?:\n\n|$)/);
+            if (paragraphMatch) {
+              description = paragraphMatch[1]
+                .replace(/[#*_`\[\]()]/g, '') // Remove markdown formatting
+                .trim()
+                .substring(0, 150);
+            }
+          } else {
+            // Handle .astro files (existing logic)
+            const frontmatterMatch = content.match(/^---\s*\n([\s\S]*?)\n---/);
+            bodyContent = content.replace(/^---\s*\n[\s\S]*?\n---/, '').trim();
+            
+            if (frontmatterMatch) {
+              const titleMatch = content.match(/title[:\s]*["']([^"']+)["']/i);
+              if (titleMatch) {
+                title = titleMatch[1];
+              }
+            }
+            
+            // Extract title from h1 tags
+            const h1Match = bodyContent.match(/<h1[^>]*>(.*?)<\/h1>/);
+            if (h1Match) {
+              title = h1Match[1].replace(/<[^>]+>/g, '').trim();
+            }
+            
+            // Extract description from first paragraph after h1
+            const afterH1 = bodyContent.replace(/<h1[^>]*>.*?<\/h1>/, '');
+            const paragraphMatch = afterH1.match(/<p[^>]*>(.*?)<\/p>/);
+            if (paragraphMatch) {
+              description = paragraphMatch[1]
+                .replace(/<[^>]+>/g, '')
+                .trim()
+                .substring(0, 150);
             }
           }
           
-          // Extract title from h1 tags
-          const h1Match = bodyContent.match(/<h1[^>]*>(.*?)<\/h1>/);
-          if (h1Match) {
-            title = h1Match[1].replace(/<[^>]+>/g, '').trim();
-          }
-          
-          // Extract description from first paragraph after h1
-          const afterH1 = bodyContent.replace(/<h1[^>]*>.*?<\/h1>/, '');
-          const paragraphMatch = afterH1.match(/<p[^>]*>(.*?)<\/p>/);
-          if (paragraphMatch) {
-            description = paragraphMatch[1]
-              .replace(/<[^>]+>/g, '') // Remove HTML tags
-              .trim()
-              .substring(0, 150); // Limit length
-          }
-          
-          // If no description found, try to get it from plain text
+          // If no description found, extract from plain text
           if (!description) {
             const plainText = bodyContent
-              .replace(/<[^>]+>/g, ' ')
-              .replace(/\s+/g, ' ')
+              .replace(/<[^>]+>/g, ' ') // Remove HTML tags
+              .replace(/[#*_`\[\]()]/g, ' ') // Remove markdown formatting
+              .replace(/\s+/g, ' ') // Normalize whitespace
               .trim();
             const sentences = plainText.split('.').filter(s => s.length > 20);
             if (sentences.length > 0) {
@@ -72,13 +103,14 @@ export async function GET() {
             }
           }
           
-          // Create searchable content by extracting text
+          // Create searchable content
           const searchableContent = bodyContent
             .replace(/<[^>]+>/g, ' ') // Remove HTML tags
+            .replace(/[#*_`\[\]()]/g, ' ') // Remove markdown formatting
             .replace(/[^\w\s]/g, ' ') // Remove special characters
             .replace(/\s+/g, ' ') // Normalize whitespace
             .toLowerCase()
-            .substring(0, 500); // Limit content length
+            .substring(0, 500);
           
           docs.push({
             title: title || 'Documentation',
