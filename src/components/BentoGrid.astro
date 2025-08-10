@@ -1,4 +1,5 @@
 ---
+import AppStoreShowcase from './AppStoreShowcase.astro';
 ---
 
 <section class="bento-section">
@@ -15,26 +16,7 @@
           <p>Create stunning App Store screenshots in minutes with our intuitive drag-and-drop editor. No design skills required.</p>
         </div>
         <div class="card-visual">
-          <div class="mockup-phone">
-            <div class="phone-screen">
-              <div class="app-preview">
-                <div class="preview-header">
-                  <div class="status-bar">10:35</div>
-                  <div class="notch"></div>
-                </div>
-                <div class="preview-content">
-                  <div class="app-icon"></div>
-                  <h4>Your Amazing App</h4>
-                  <div class="rating-stars">★★★★★</div>
-                  <div class="screenshots-grid">
-                    <div class="mini-screenshot"></div>
-                    <div class="mini-screenshot"></div>
-                    <div class="mini-screenshot active"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <AppStoreShowcase />
         </div>
       </div>
 
@@ -254,84 +236,6 @@
     justify-content: stretch;
   }
 
-  /* Phone Mockup */
-  .mockup-phone {
-    width: 180px;
-    height: 360px;
-    background: #000;
-    border-radius: 30px;
-    padding: 8px;
-    position: relative;
-  }
-
-  .phone-screen {
-    width: 100%;
-    height: 100%;
-    background: #f8fafc;
-    border-radius: 22px;
-    overflow: hidden;
-  }
-
-  .notch {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 25px;
-    background: #000;
-    border-radius: 0 0 15px 15px;
-  }
-
-  .status-bar {
-    text-align: center;
-    padding: 8px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-
-  .app-preview {
-    padding: 20px;
-    text-align: center;
-  }
-
-  .app-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 12px;
-    margin: 0 auto 10px;
-  }
-
-  .app-preview h4 {
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-
-  .rating-stars {
-    color: #fbbf24;
-    font-size: 12px;
-    margin-bottom: 20px;
-  }
-
-  .screenshots-grid {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-  }
-
-  .mini-screenshot {
-    width: 40px;
-    height: 70px;
-    background: #e5e7eb;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-  }
-
-  .mini-screenshot.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    transform: scale(1.1);
-  }
 
   /* Localization Demo */
   .localization-demo {
