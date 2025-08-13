@@ -2,6 +2,7 @@
 import { Picture } from 'astro:assets';
 import downloadAppStore from '../images/download_appstore.png';
 import downloadTestFlight from '../images/download_testflight.png';
+import SmartPicture from './SmartPicture.astro';
 ---
 
 <section class="hero">
@@ -17,11 +18,11 @@ import downloadTestFlight from '../images/download_testflight.png';
       
       <div class="cta-buttons">
         <!-- <a href="#" class="mac-app-store-btn">
-          <Picture src={downloadAppStore} formats={['avif', 'webp']} alt="Download on the Mac App Store" height={50} />
+          <SmartPicture src={downloadAppStore} formats={['avif', 'webp']} alt="Download on the Mac App Store" height={50} />
         </a> -->
 
         <a href="#" class="mac-app-store-btn">
-          <Picture src={downloadTestFlight} formats={['avif', 'webp']} alt="Join the TestFlight" height={50} />
+          <SmartPicture src={downloadTestFlight} formats={['avif', 'webp']} alt="Join the TestFlight" height={50} />
         </a>
       </div>
     </div>
