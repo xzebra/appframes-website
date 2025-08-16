@@ -38,11 +38,11 @@ const { pathname } = Astro.url;
         
         <div class="card-grid">
           {docsCards.map(card => (
-            <div class="card">
+            <a class="card" href={card.route}>
               <h3>{card.emoji} {card.shortTitle}</h3>
               <p>{card.shortDescription}</p>
-              <a href={card.route}>{card.cta} →</a>
-            </div>
+              <span class="cta">{card.cta} →</span>
+            </a>
           ))}
         </div>
       </div>
@@ -132,6 +132,9 @@ const { pathname } = Astro.url;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     padding: 1.5rem;
+    display: block;
+    color: inherit;
+    text-decoration: none;
     transition: box-shadow 0.2s;
   }
   
@@ -150,14 +153,14 @@ const { pathname } = Astro.url;
     margin: 0 0 1rem 0;
   }
   
-  .card a {
+  .card .cta {
     color: #3b82f6;
     text-decoration: none;
     font-weight: 500;
     font-size: 0.875rem;
   }
   
-  .card a:hover {
+  .card:hover .cta {
     text-decoration: underline;
   }
   
