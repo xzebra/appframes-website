@@ -3,6 +3,7 @@ import { Picture } from 'astro:assets';
 import SmartPicture from './SmartPicture.astro';
 import AppStoreShowcase from './AppStoreShowcase.astro';
 import appStoreConnectLogo from '../images/New_App_Store_connect_logo.webp';
+import AnimatedCurvedArrow from './AnimatedCurvedArrow.astro';
 ---
 
 <section class="bento-section">
@@ -96,7 +97,7 @@ import appStoreConnectLogo from '../images/New_App_Store_connect_logo.webp';
               <div class="file"></div>
             </div>
             <div class="curved-arrow">
-              <dotlottie-wc src="https://lottie.host/48f5b9f5-5239-4e9d-a96f-30b985a1e9fc/igIVhfs6R5.lottie" style="width: 100px;height: 50px" speed="1" autoplay loop></dotlottie-wc>
+              <AnimatedCurvedArrow />
             </div>
             <div class="appstore-connect">
               <SmartPicture src={appStoreConnectLogo} formats={['avif', 'webp']} alt="App Store Connect" class="asc-logo" width={60} height={60} />
