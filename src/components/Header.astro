@@ -1,10 +1,15 @@
 ---
 import { Picture } from 'astro:assets';
 import macosLogo from '../images/macOS-logo.svg';
-import SearchBox from './SearchBox.astro';
 
 const { pathname } = Astro.url;
 const isDocsPage = pathname.startsWith('/docs');
+
+let SearchBox;
+if (isDocsPage) {
+  // @ts-ignore
+  SearchBox = (await import('./SearchBox.astro')).default;
+}
 ---
 
 <header class="header">
