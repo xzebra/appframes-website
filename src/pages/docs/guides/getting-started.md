@@ -18,47 +18,50 @@ Welcome to AppFrames! In just a few minutes, you'll have professional App Store 
 ### 1. Create a New Project
 
 1. Launch AppFrames from your Applications folder
-2. Click **"New Project"** 
-3. Your project starts with iPhone, iPad, and Mac devices ready to use
+2. Create a new file. It's recommended to save it in iCloud so you can sync it between devices.
+3. Your project starts with iPhone, iPad, and Mac devices ready to use. Feel free to delete those you don't need.
 
 ### 2. Drag and Drop Your Screenshots
 
 1. **Select a device** from the sidebar (start with iPhone)
-2. **Drag your app screenshot** from Finder directly onto the canvas
+2. **Drag your app screenshot** from Finder/Simulator directly onto the canvas. If you drop them within a screenshot frame, it will add/replace the frame image. If you drop them on the canvas (grid background) it'll create new screenshot frames for you.
 3. AppFrames automatically positions your screenshot in the device frame
 
 The screenshot will appear with automatic positioning - your app's interface shows clearly within the device frame.
 
 ### 3. Add Your Marketing Text
 
-1. **Click the text area** below your screenshot
+1. Select a screenshot
+2. Open the right **Inspector panel**, you'll see a section called "Text content"
 2. **Type your headline** - something like "Advanced Photo Editing Made Simple"
-3. **Add body text** (optional) for more details about your app's benefits
+3. **Add body text** (optional) for more details about your app's benefits. Most screenshots don't usually need this.
 
 Your text automatically positions opposite to your screenshot for perfect composition.
 
 ### 4. Style Your Screenshot
 
-Use the **Inspector panel** (right sidebar) to customize:
+Without any screenshot selected (tap outside to deselect), use the **Inspector panel** (right sidebar) to customize:
 
 - **Text styling**: Change font, size, weight, and color
 - **Background**: Adjust background colors or gradients  
 - **Image position**: Choose from 8 alignment options
 - **Device frame**: Customize bezels and shadows
 
+This properties will apply to all screenshots and devices for consistency. Some can be overriden in the screenshot specific panel.
+
 ### 5. Export or Upload
 
 When you're happy with your screenshot:
 
-- **Export**: Click **"Export All"** to save PNG files to your Mac
+- **Export**: Click **"Export All"** (file with a down arrow icon) to save PNG files to your Mac
 - **Upload**: Click **"Upload to App Store"** to send directly to App Store Connect
 
 ## Adding More Screenshots
 
 ### Multiple Screenshots Per Device
-1. **Click the "+" button** next to your device in the sidebar
-2. **Add more screenshots** to show different app features
-3. **Duplicate existing screenshots** to maintain consistent styling
+
+Simply drag and drop more images to the background. They will keep the same styling as the rest.
+**Add more screenshots** to show different app features.
 
 ### Multiple Devices
 Your project includes iPhone, iPad, and Mac by default:
@@ -66,7 +69,7 @@ Your project includes iPhone, iPad, and Mac by default:
 - **iPad screenshots**: For tablet-optimized layouts  
 - **Mac screenshots**: For desktop app listings
 
-Each device maintains its own set of screenshots with proper App Store dimensions.
+Each device maintains its own set of screenshot images with proper App Store dimensions.
 
 ## Going Global with Languages
 
@@ -87,11 +90,11 @@ Your screenshots automatically update with translated text while keeping the sam
 ## A/B Testing Different Approaches
 
 ### Create Variants
-1. **Find the Variant Picker** in the canvas controls
-2. **Click the "+" button** to create a new variant
+1. **Find the Variant Picker** in the bottom right canvas controls
+2. Click it and **click the "+" button** to create a new variant
 3. **Name it descriptively** like "Benefit Focus" or "Feature Highlight"
 
-### Test Different Messages
+### A/B Test different changes
 Switch between variants to test:
 - **Different headlines**: "Fast Photo Editing" vs "Professional Results"
 - **Different layouts**: Image at top vs bottom
@@ -99,20 +102,11 @@ Switch between variants to test:
 
 Each variant inherits your base design but lets you override specific elements.
 
-## Ready to Submit
+### Upload to the App Store
 
-### Export for App Store
-1. **Click "Export All"** in the toolbar
-2. **Choose your export location**
-3. AppFrames generates properly sized PNG files organized by device type
+When uploading to the App Store, you can select *Experiment* instead of *Product Page*. It'll prompt you to create a new experiment if you don't have any ready to receive screenshots.
 
-Your files are named correctly for App Store Connect (like `iPhone6.9_en_01.png`) and ready for direct upload.
-
-### Direct Upload
-1. **Click "Upload to App Store"** in the toolbar
-2. **Sign in with your Apple ID**
-3. **Select your app** and version
-4. AppFrames uploads everything automatically with proper organization
+You can match variants to each treatment of the experiment. The control group will always be the current set of released screenshots (may not be your Main variant).
 
 ## Tips for Great Screenshots
 
