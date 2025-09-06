@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout title="Contact - AppFrames">
+	<Header />
+	<main>
+		<div class="page-container">
+			<div class="content">
+				<section>
+					<h1>Contact</h1>
+					<p>Have a question? Send us a message.</p>
+
+					<form onsubmit="window.open('mailto:contact@xzebra.dev?subject=AppFrames - ' + this.subject.value + '&body=' + this.body.value); return false">
+						<div class="field">
+							<label for="subject">Subject</label>
+							<input type="text" id="subject" name="subject" required />
+						</div>
+
+						<div class="field">
+							<label for="body">Message</label>
+							<textarea id="body" name="body" rows="6" required></textarea>
+						</div>
+
+						<button type="submit" class="send-btn">Send</button>
+					</form>
+				</section>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+
+<style>
+	.page-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+		min-height: 80vh;
+	}
+
+	.content {
+		padding: 0 1rem;
+	}
+
+	.content h1 {
+		color: #111827;
+		margin-bottom: 1rem;
+	}
+
+	.content h2 {
+		color: #111827;
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+	}
+
+	.content h3 {
+		color: #374151;
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.content p,
+	.content li {
+		color: #6b7280;
+		line-height: 1.6;
+	}
+
+	.content ul,
+	.content ol {
+		margin-bottom: 1rem;
+		margin-left: 1.5rem;
+		margin-top: 1rem;
+	}
+
+	.field {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 1rem;
+	}
+
+	label {
+		color: #374151;
+		font-weight: 500;
+		margin-bottom: 0.5rem;
+	}
+
+	input,
+	textarea {
+		width: 100%;
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		padding: 0.75rem;
+		font-size: 1rem;
+		color: #111827;
+	}
+
+	input:focus,
+	textarea:focus {
+		outline: none;
+		border-color: #3b82f6;
+		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+	}
+
+	.send-btn {
+		display: inline-block;
+		background: #3b82f6;
+		color: #ffffff;
+		border: none;
+		border-radius: 8px;
+		padding: 0.75rem 1rem;
+		font-weight: 500;
+		cursor: pointer;
+	}
+
+	.send-btn:hover {
+		background: #2563eb;
+	}
+
+	@media (max-width: 768px) {
+		.page-container {
+			padding: 1rem;
+		}
+	}
+</style>
+
